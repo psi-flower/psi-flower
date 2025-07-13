@@ -1,0 +1,59 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f3e8ff; /* violeta claro */
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #4a148c;
+  margin-bottom: 40px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.column {
+  background-color: white;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.column h2 {
+  text-align: center;
+  font-size: 1.1em;
+  color: #6a1b9a;
+}
+
+.subject {
+  background-color: #ccc;
+  padding: 6px;
+  margin: 5px 0;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.subject.approved {
+  background-color: #ffcc80; /* naranja pastel */
+}
+
+.subject.enabled {
+  background-color: #e1bee7; /* lila pastel */
+}
+
+.subject.disabled {
+  background-color: #ccc; /* gris */
+  cursor: not-allowed;
+}
+
+.subject.tesis {
+  background-color: #f8bbd0 !important; /* rosa pastel */
+  cursor: not-allowed;
+}
