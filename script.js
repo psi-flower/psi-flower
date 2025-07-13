@@ -99,3 +99,4 @@ function updateState() {
 });
 
 updateState();
+updateState();
