@@ -49,6 +49,7 @@ const correlativas = {
   ]
 };
 
+const savedState = JSON.parse(localStorage.getItem("materiasAprobadas") || "[]");
 const state = {};
 const grid = document.getElementById("grid");
 
@@ -73,8 +74,15 @@ Object.entries(data).forEach(([block, subjects]) => {
       div.classList.add("disabled");
     }
 
+    const isApproved = savedState.includes(subject);
+    state[subject] = { el: div, approved: isApproved };
+
+    if (isApproved) {
+      div.classList.add("approved");
+      div.classList.remove("enabled");
+    }
+
     col.appendChild(div);
-    state[subject] = { el: div, approved: false };
   });
 
   grid.appendChild(col);
@@ -102,7 +110,23 @@ grid.addEventListener("click", e => {
   subject.approved = !subject.approved;
   e.target.classList.toggle("approved", subject.approved);
   e.target.classList.remove("enabled");
+
+  // Guardar materias aprobadas
+  const approvedSubjects = Object.entries(state)
+    .filter(([_, val]) => val.approved)
+    .map(([key]) => key);
+  localStorage.setItem("materiasAprobadas", JSON.stringify(approvedSubjects));
+
   updateState();
 });
 
 updateState();
+
+// (Opcional) botón para resetear todo
+const resetBtn = document.getElementById("reset");
+if (resetBtn) {
+  resetBtn.addEventListener("click", () => {
+    localStorage.removeItem("materiasAprobadas");
+    location.reload();
+  });
+}
